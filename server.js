@@ -143,15 +143,12 @@ const photoUpload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }
 }).single('avatar');
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:8080",
-      "https://matrimony-hazel-omega.vercel.app",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: "*",   // allow requests from any frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use("/api/auth", forgotRoutes);
 app.use("/api/payment", Razorpay);
 app.use("/api", events);
@@ -2579,4 +2576,5 @@ const startServer = async () => {
 };
 
 startServer();
+
 
